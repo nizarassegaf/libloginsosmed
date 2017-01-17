@@ -17,7 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import static id.gits.loginmedsos.GoogleOnclickListener.RQ_GOOGLE;
@@ -50,12 +52,6 @@ public class GoogleLogin extends RelativeLayout {
         bindView();
 
         setAtribut(context, attrs);
-        setButtonText(mButtonText);
-        setButtonBackground(mButtonBackground);
-        setIconButton(mIconLogin);
-        setTextColor(mTextColor);
-        setTextSize(mTextSize);
-        setIconColor(mIconColor);
     }
 
     public GoogleLogin(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -63,7 +59,7 @@ public class GoogleLogin extends RelativeLayout {
         bindView();
     }
 
-    private void bindView(){
+    private void bindView() {
         inflate(getContext(), R.layout.google_login, this);
         btnLogin = (LinearLayout) findViewById(R.id.signin_button);
         textLogin = (TextView) findViewById(R.id.textgoogle);
@@ -75,6 +71,7 @@ public class GoogleLogin extends RelativeLayout {
 
     /**
      * Initiate login google
+     *
      * @param activity
      */
     public void initLoginGoogle(final Activity activity) {
@@ -93,13 +90,15 @@ public class GoogleLogin extends RelativeLayout {
                 activity.startActivityForResult(signInIntent, RQ_GOOGLE);
             }
         });
+
     }
 
     /**
      * Set text size button facebook
+     *
      * @param buttonText
      */
-    public void setButtonText(String buttonText){
+    public void setButtonText(String buttonText) {
         mButtonText = buttonText;
         //btnLogin.setVisibility(TextUtils.isEmpty(mButtonText) ? View.GONE : View.VISIBLE);
         textLogin.setText(mButtonText);
@@ -108,29 +107,32 @@ public class GoogleLogin extends RelativeLayout {
 
     /**
      * Set text size button facebook
+     *
      * @param textSize
      */
-    public void setTextSize(float textSize){
+    public void setTextSize(float textSize) {
         mTextSize = textSize;
         textLogin.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
     }
 
     /**
      * Set text color button facebook
+     *
      * @param color
      */
-    public void setTextColor(ColorStateList color){
+    public void setTextColor(ColorStateList color) {
         mTextColor = color;
         textLogin.setTextColor(mTextColor);
     }
 
     /**
      * Set icon button facebook
+     *
      * @param drawable
      */
-    public void setIconButton(Drawable  drawable){
+    public void setIconButton(Drawable drawable) {
         mIconLogin = drawable;
-        if(!TextUtils.isEmpty(mButtonText) && drawable != null){
+        if (!TextUtils.isEmpty(mButtonText) && drawable != null) {
             mView.setVisibility(VISIBLE);
         }
 
@@ -141,17 +143,17 @@ public class GoogleLogin extends RelativeLayout {
                 icLogin.setBackgroundDrawable(mIconLogin);
             }
             icLogin.setVisibility(VISIBLE);
-        }
-        else {
+        } else {
             icLogin.setVisibility(GONE);
         }
     }
 
     /**
      * Set icon color at button facebook
+     *
      * @param color
      */
-    public void setIconColor(ColorStateList color){
+    public void setIconColor(ColorStateList color) {
         mIconColor = color;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             icLogin.setBackgroundTintList(mIconColor);
@@ -160,9 +162,10 @@ public class GoogleLogin extends RelativeLayout {
 
     /**
      * Set button background facebook
+     *
      * @param drawable
      */
-    public void setButtonBackground(Drawable drawable){
+    public void setButtonBackground(Drawable drawable) {
         mButtonBackground = drawable;
         if (drawable != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -173,7 +176,7 @@ public class GoogleLogin extends RelativeLayout {
         }
     }
 
-    private void setAtribut(Context context,AttributeSet attrs){
+    private void setAtribut(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.GoogleLogin,
@@ -183,12 +186,43 @@ public class GoogleLogin extends RelativeLayout {
             mButtonText = a.getString(R.styleable.GoogleLogin_login_Text);
             mButtonBackground = a.getDrawable(R.styleable.GoogleLogin_login_ButtonBackground);
             mIconLogin = a.getDrawable(R.styleable.GoogleLogin_login_Icon);
-            mTextColor = ColorStateList.valueOf(a.getColor(R.styleable.GoogleLogin_login_TextColor,1));
-            mTextSize = a.getDimension(R.styleable.GoogleLogin_login_TextSize,px);
-            mIconColor = ColorStateList.valueOf(a.getColor(R.styleable.GoogleLogin_login_IcColor,1));
+            mTextColor = ColorStateList.valueOf(a.getColor(R.styleable.GoogleLogin_login_TextColor, 1));
+            mTextSize = a.getDimension(R.styleable.GoogleLogin_login_TextSize, px);
+            mIconColor = ColorStateList.valueOf(a.getColor(R.styleable.GoogleLogin_login_IcColor, 1));
         } finally {
             a.recycle();
         }
+
+        injectView();
+    }
+
+    /**
+     * get result from GoogleSignInApi
+     *
+     * @param data
+     * @return
+     */
+    public static DaoSosmed resultLogoin(Intent data) {
+        GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+        DaoSosmed daoSosmed = new DaoSosmed();
+        if (result.isSuccess()) {
+            if (daoSosmed != null) {
+                GoogleSignInAccount acct = result.getSignInAccount();
+                daoSosmed.setEmail(acct.getEmail());
+                daoSosmed.setId(acct.getId());
+                daoSosmed.setName(acct.getDisplayName());
+            }
+        }
+        return daoSosmed;
+    }
+
+    private void injectView() {
+        setButtonText(mButtonText);
+        setButtonBackground(mButtonBackground);
+        setIconButton(mIconLogin);
+        setTextColor(mTextColor);
+        setTextSize(mTextSize);
+        setIconColor(mIconColor);
     }
 
 }

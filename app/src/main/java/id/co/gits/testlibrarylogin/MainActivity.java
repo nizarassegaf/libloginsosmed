@@ -9,14 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 
+import id.gits.loginmedsos.DaoSosmed;
 import id.gits.loginmedsos.FaceBookLogin;
 import id.gits.loginmedsos.FacebookCustomCallBack;
-import id.gits.loginmedsos.FacebookDao;
 import id.gits.loginmedsos.GoogleLogin;
 import id.gits.loginmedsos.GoogleOnclickListener;
 
@@ -26,6 +23,7 @@ import static id.gits.loginmedsos.GoogleOnclickListener.RQ_GOOGLE;
 public class MainActivity extends AppCompatActivity {
     private GoogleLogin googleLogin;
     private FaceBookLogin faceBookLogin;
+    private DaoSosmed daoSo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +33,18 @@ public class MainActivity extends AppCompatActivity {
         faceBookLogin = (FaceBookLogin) findViewById(R.id.btnFacebook);
         faceBookLogin.initLoginFaceBook(new FacebookCustomCallBack() {
             @Override
-            public void onSuccessLogin(FacebookDao dao) {
+            public void onSuccessLogin(DaoSosmed daoSosmed) {
+                daoSo = daoSosmed;
                 try {
-                    if(!dao.getEmail().isEmpty()){
-                        Toast.makeText(getApplicationContext(),dao.getEmail()+" berhasil login",Toast.LENGTH_LONG).show();
+                    if(!daoSo.getEmail().isEmpty()){
+                        Toast.makeText(getApplicationContext(), daoSo.getEmail()+" berhasil login",Toast.LENGTH_LONG).show();
                     }
                 } catch (NullPointerException npe) {
                     Toast.makeText(getApplicationContext(),"login facebook gagal, silahkan coba lagi",Toast.LENGTH_LONG).show();
                 }
 
-                Log.wtf("emailfb1",dao.getName());
-                Log.wtf("emailfb",dao.getEmail());
+                Log.wtf("emailfb1", daoSo.getName());
+                Log.wtf("emailfb", daoSo.getEmail());
             }
 
             @Override
@@ -65,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 super.onClick(view);
+                if(daoSo.getEmail() != null) {
+                    Log.wtf("daoSosmed", daoSo.getEmail());
+                }
             }
 
             @Override
@@ -88,16 +90,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        Log.wtf("requestCote", String.valueOf(requestCode));
         if (requestCode == RQ_GOOGLE) {
-
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            GoogleSignInAccount acct = result.getSignInAccount();
-            Toast.makeText(this,acct.getEmail()+"berhasil login",Toast.LENGTH_LONG).show();
-
-        }
-        else {
+            daoSo = googleLogin.resultLogoin(data);
+            Toast.makeText(getApplicationContext(), daoSo.getEmail()+" berhasil login",Toast.LENGTH_LONG).show();
+        }else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }

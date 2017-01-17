@@ -51,20 +51,12 @@ public class FaceBookLogin extends RelativeLayout {
         bindView();
 
         setAtribut(context, attrs);
-
-        setButtonText(mButtonText);
-        setButtonBackground(mButtonBackground);
-        setIconButton(mIconLogin);
-        setTextColor(mTextColor);
-        setTextSize(mTextSize);
-        setIconColor(mIconColor);
     }
 
     public FaceBookLogin(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         bindView();
     }
-
 
     public void bindView() {
         FacebookSdk.sdkInitialize(getContext());
@@ -183,6 +175,17 @@ public class FaceBookLogin extends RelativeLayout {
         } finally {
             a.recycle();
         }
+
+        injectView();
+    }
+
+    private void injectView(){
+        setButtonText(mButtonText);
+        setButtonBackground(mButtonBackground);
+        setIconButton(mIconLogin);
+        setTextColor(mTextColor);
+        setTextSize(mTextSize);
+        setIconColor(mIconColor);
     }
 
 }

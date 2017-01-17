@@ -17,17 +17,17 @@ import org.json.JSONObject;
 
 public abstract class FacebookCustomCallBack implements FacebookCallback<LoginResult> {
     public static final int RQ_FACEBOOK = 64206;
-    private FacebookDao facebookDao;
+    private DaoSosmed daoSosmed;
     private String[] email = {""};
 
-    public abstract void onSuccessLogin(FacebookDao dao);
+    public abstract void onSuccessLogin(DaoSosmed daoSosmed);
 
     public abstract void onErrorLogin(String error);
 
     public abstract void onCancelLogin();
 
     public FacebookCustomCallBack() {
-        facebookDao = new FacebookDao();
+        daoSosmed = new DaoSosmed();
     }
 
     @Override
@@ -42,9 +42,9 @@ public abstract class FacebookCustomCallBack implements FacebookCallback<LoginRe
                             String FEmail = object.getString("email");
                             String FName = object.getString("name");
                             String FId = object.getString("id");
-                            facebookDao.setEmail(FEmail);
-                            facebookDao.setName(FName);
-                            facebookDao.setId(FId);
+                            daoSosmed.setEmail(FEmail);
+                            daoSosmed.setName(FName);
+                            daoSosmed.setId(FId);
 
 
                         } catch (JSONException e) {
@@ -59,7 +59,7 @@ public abstract class FacebookCustomCallBack implements FacebookCallback<LoginRe
         request.setParameters(parameters);
         request.executeAsync();
 
-        onSuccessLogin(facebookDao);
+        onSuccessLogin(daoSosmed);
     }
 
     @Override

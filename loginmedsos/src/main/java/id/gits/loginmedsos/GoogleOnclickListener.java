@@ -12,9 +12,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
  * Created by nizarassegaf on 1/9/2017.
  */
 
-public abstract class GoogleOnclickListener implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public abstract class GoogleOnclickListener implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     public static final int RQ_GOOGLE = 901;
-    public static GoogleApiClient mGoogleApiClient;
+    public static GoogleApiClient mGoogleApiClient;private DaoSosmed daoSosmed;
 
     @Override
     public void onClick(View view) {
@@ -41,5 +41,4 @@ public abstract class GoogleOnclickListener implements View.OnClickListener, Goo
             mGoogleApiClient.disconnect();
         }
     }
-
 }

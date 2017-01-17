@@ -4,7 +4,7 @@ package id.gits.loginmedsos;
  * Created by teddy on 1/5/17.
  */
 
-public class FacebookDao {
+public class DaoSosmed {
 
     private String name;
     private String email;
