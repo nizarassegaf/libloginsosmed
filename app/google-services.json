@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "372771040149",
+    "project_id": "testlibrarylogin-155402"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372771040149:android:7f5f282091e90f0c",
+        "android_client_info": {
+          "package_name": "id.co.gits.testlibrarylogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372771040149-qhcb7lvsj93jm9tkira9cvug5a5459n2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.co.gits.testlibrarylogin",
+            "certificate_hash": "7D7A8E747114618FA3FA4F3DBF8CF04DFFA18A46"
+          }
+        },
+        {
+          "client_id": "372771040149-rjohu1se5l4sf8vf47m8s2h1nuv253ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaoV_6fGlvbs8w_1a5Ab3z-XyHuYDj7_k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

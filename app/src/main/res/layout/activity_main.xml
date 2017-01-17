@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="id.co.gits.testlibrarylogin.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <id.gits.loginmedsos.FaceBookLogin
+            android:id="@+id/btnFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            app:loginfb_ButtonBackground="@color/com_facebook_blue"
+            app:loginfb_IcColor="@color/cardview_light_background"
+            app:loginfb_Icon="@drawable/ic_fb24"
+            app:loginfb_Text="Login Facebook"
+            app:loginfb_TextColor="@color/cardview_light_background"
+            app:loginfb_TextSize="12sp" />
+
+        <id.gits.loginmedsos.GoogleLogin
+            android:id="@+id/btnGoogle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            app:login_ButtonBackground="@color/colorRed"
+            app:login_IcColor="@color/cardview_light_background"
+            app:login_Icon="@drawable/ic_gp24"
+            app:login_Text="Login Google"
+            app:login_TextColor="@color/cardview_light_background"
+            app:login_TextSize="12sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "552084997612",
+    "project_id": "firebase-librarylogin"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552084997612:android:bb6520476b112f89",
+        "android_client_info": {
+          "package_name": "id.gits.loginmedsos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552084997612-p4nb32c4ohunni9tvrempkufarclc6mu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.gits.loginmedsos",
+            "certificate_hash": "7D7A8E747114618FA3FA4F3DBF8CF04DFFA18A46"
+          }
+        },
+        {
+          "client_id": "552084997612-6e4fbk16e422belo33kvidtm0defrnvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQRudzP1xUQbeJB9N7OihO8rfQ0DpTlPQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
